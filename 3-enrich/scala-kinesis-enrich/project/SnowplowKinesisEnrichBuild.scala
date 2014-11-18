@@ -43,7 +43,6 @@ object SnowplowKinesisEnrichBuild extends Build {
         Libraries.scalazSpecs2,
         Libraries.commonsLang3,
         Libraries.thrift,
-        Libraries.slf4j,
         Libraries.awsSdk,
         Libraries.kinesisClient,
         Libraries.kinesisConnector,

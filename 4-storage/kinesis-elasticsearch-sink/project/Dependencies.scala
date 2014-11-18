@@ -29,7 +29,6 @@ object Dependencies {
     val httpCore             = "4.3"
     val httpClient           = "4.3.1"
     val jacksonCore          = "2.3.0"
-    val slf4j                = "1.7.5"
     val awsSdk               = "1.6.11"
     val kinesisClient        = "1.0.0"
     val kinesisConnector     = "1.1.1"
@@ -56,7 +55,6 @@ object Dependencies {
     val httpCore             = "org.apache.httpcomponents"  %  "httpcore"                 % V.httpCore
     val httpClient           = "org.apache.httpcomponents"  %  "httpclient"               % V.httpClient
     val jacksonCore          = "com.fasterxml.jackson.core" %  "jackson-core"             % V.jacksonCore
-    val slf4j                = "org.slf4j"                  %  "slf4j-simple"             % V.slf4j
     val awsSdk               = "com.amazonaws"              %  "aws-java-sdk"             % V.awsSdk
     val kinesisClient        = "com.amazonaws"              %  "amazon-kinesis-client"    % V.kinesisClient
     val kinesisConnector     = "com.amazonaws"              %  "amazon-kinesis-connector" % V.kinesisConnector
