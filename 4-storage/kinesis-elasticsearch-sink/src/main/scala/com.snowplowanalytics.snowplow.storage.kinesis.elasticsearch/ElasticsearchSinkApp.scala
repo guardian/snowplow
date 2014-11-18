@@ -143,7 +143,6 @@ object ElasticsearchSinkApp extends App {
 
     props.setProperty(KinesisConnectorConfiguration.PROP_CONNECTOR_DESTINATION, "elasticsearch")
     props.setProperty(KinesisConnectorConfiguration.PROP_DYNAMODB_ENDPOINT, s"dynamodb.$streamRegion.amazonaws.com")
-    props.setProperty(KinesisConnectorConfiguration.PROP_DYNAMODB_DATA_TABLE_NAME, "catface")
     props.setProperty(KinesisConnectorConfiguration.PROP_REGION_NAME, streamRegion)
 
 
