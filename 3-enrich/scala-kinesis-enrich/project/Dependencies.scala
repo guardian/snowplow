@@ -17,7 +17,6 @@ object Dependencies {
   val resolutionRepos = Seq(
     // For Snowplow
     "Snowplow Analytics Maven releases repo" at "http://maven.snplow.com/releases/",
-    "Snowplow Analytics Maven snapshot repo" at "http://maven.snplow.com/snapshots/",
     // For Scalazon
     "BintrayJCenter"                         at "http://jcenter.bintray.com",
     // For user-agent-utils
@@ -32,13 +31,15 @@ object Dependencies {
     val jacksonCore          = "2.3.0"
     val slf4j                = "1.7.5"
     val awsSdk               = "1.6.11"
-    val kinesisClient        = "1.0.0"
+    val kinesisClient        = "1.2.0"
+    val kinesisConnector     = "1.1.1"
     // Scala
     val argot                = "1.0.1"
     val config               = "1.0.2"
     val scalaUtil            = "0.1.0"
     val snowplowRawEvent     = "0.1.0"
-    val snowplowCommonEnrich = "0.2.0"
+    val snowplowCommonEnrich = "0.7.1-SNAPSHOT"
+    val igluClient           = "0.1.0"
     val scalazon             = "0.5"
     val scalaz7              = "7.0.0"
     val maxmindGeoip         = "0.0.5"
@@ -63,13 +64,15 @@ object Dependencies {
     val slf4j                = "org.slf4j"                  %  "slf4j-simple"             % V.slf4j
     val awsSdk               = "com.amazonaws"              %  "aws-java-sdk"             % V.awsSdk
     val kinesisClient        = "com.amazonaws"              %  "amazon-kinesis-client"    % V.kinesisClient
-    val maxmindGeoip         = "com.snowplowanalytics"      %% "scala-maxmind-geoip"      % V.maxmindGeoip
+    val kinesisConnector     = "com.amazonaws"              %  "amazon-kinesis-connector" % V.kinesisConnector
+    val maxmindGeoip         = "com.snowplowanalytics"      %% "scala-maxmind-geoip"      % V.maxmindGeoip % "provided"
     // Scala
     val argot                = "org.clapper"                %% "argot"                    % V.argot
     val config               = "com.typesafe"               %  "config"                   % V.config
     val scalaUtil            = "com.snowplowanalytics"      %  "scala-util"               % V.scalaUtil
     val snowplowRawEvent     = "com.snowplowanalytics"      % "snowplow-thrift-raw-event" % V.snowplowRawEvent
     val snowplowCommonEnrich = "com.snowplowanalytics"      % "snowplow-common-enrich"    % V.snowplowCommonEnrich
+    val igluClient           = "com.snowplowanalytics"      %% "iglu-scala-client"        % V.igluClient
     val scalazon             = "io.github.cloudify"         %% "scalazon"                 % V.scalazon
     val scalaz7              = "org.scalaz"                 %% "scalaz-core"              % V.scalaz7
     // Scala (test only)
