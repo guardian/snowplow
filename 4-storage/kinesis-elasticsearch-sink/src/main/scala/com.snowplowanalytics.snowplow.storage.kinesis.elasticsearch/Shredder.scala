@@ -37,10 +37,9 @@ class Shredder {
   def fixSchema(prefix: String, schema: String): String = {
     schema match {
       case schemaPattern(organization, name, schemaVer) => {
-        val snakeCaseOrganization = organization.replaceAll("""\.""", "_").toLowerCase
         val snakeCaseName = name.replaceAll("([^_])([A-Z])", "$1_$2").toLowerCase
         val model = schemaVer.split("-")(0)
-        s"${prefix}_${snakeCaseOrganization}_${snakeCaseName}_${model}"
+        s"${snakeCaseName}_${model}"
       }
       // TODO implement validation
       case _ => s"${prefix}.${schema}"
@@ -58,12 +57,13 @@ class Shredder {
   def parseUnstruct(unstruct: String): JObject = {
     val json = parse(unstruct)
     val data = json \ "data"
-    val schema = data \ "schema"
+    val schema = json \ "schema"
     val innerData = data \ "data"
     val fixedSchema = schema match {
       case JString(s) => fixSchema("unstruct", s)
       case _ => throw new RuntimeException("TODO: badly formatted event")
     }
-    (fixedSchema, innerData)
+
+    (fixedSchema, data)
   }
 }

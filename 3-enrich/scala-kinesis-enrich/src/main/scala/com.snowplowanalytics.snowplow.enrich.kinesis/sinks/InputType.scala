@@ -1,4 +1,4 @@
- /*
+/*
  * Copyright (c) 2013-2014 Snowplow Analytics Ltd.
  * All rights reserved.
  *
@@ -16,30 +16,12 @@
  * See the Apache License Version 2.0 for the specific language
  * governing permissions and limitations there under.
  */
-package com.snowplowanalytics
-package snowplow.enrich
-package kinesis
-package sources
-
-// Iglu
-import iglu.client.Resolver
-
-// Snowplow
-import common.enrichments.EnrichmentRegistry
+package com.snowplowanalytics.snowplow.enrich.kinesis.sinks
 
 /**
- * Source to allow the testing framework to enrich events
- * using the same methods from AbstractSource as the other
- * sources.
+ * Whether the sink is for good rows or bad rows
  */
-class TestSource(config: KinesisEnrichConfig, igluResolver: Resolver, enrichmentRegistry: EnrichmentRegistry)
-    extends AbstractSource(config, igluResolver, enrichmentRegistry) {
-
-  /**
-   * Never-ending processing loop over source stream.
-   * Not supported for TestSource.
-   */
-  def run = {
-    throw new RuntimeException("run() should not be called on TestSource")
-  }
+object InputType extends Enumeration {
+  type InputType = Value
+  val Good, Bad = Value
 }
