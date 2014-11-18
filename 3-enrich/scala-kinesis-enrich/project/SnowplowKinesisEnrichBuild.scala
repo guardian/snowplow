@@ -28,7 +28,7 @@ object SnowplowKinesisEnrichBuild extends Build {
     .settings(buildSettings: _*)
     .settings(
       libraryDependencies ++= Seq(
-        Libraries.logging,
+        Libraries.logback,
         Libraries.httpCore,
         Libraries.httpClient,
         Libraries.jacksonCore,
