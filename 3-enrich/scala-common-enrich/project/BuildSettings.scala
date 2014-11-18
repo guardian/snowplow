@@ -18,10 +18,12 @@ import Keys._
 
 object BuildSettings {
 
+  isSnapshot := true
+
   // Basic settings for our app
   lazy val basicSettings = Seq[Setting[_]](
     organization          :=  "com.snowplowanalytics",
-    version               :=  "0.8.0",
+    version               :=  "0.7.1-SNAPSHOT",
     description           :=  "Common functionality for enriching raw Snowplow events",
     scalaVersion          :=  "2.10.1",
     scalacOptions         :=  Seq("-deprecation", "-encoding", "utf8",

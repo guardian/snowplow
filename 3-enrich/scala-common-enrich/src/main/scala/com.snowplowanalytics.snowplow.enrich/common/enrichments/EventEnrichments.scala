@@ -46,7 +46,7 @@ object EventEnrichments {
    *        to convert to a timestamp String
    * @return the timestamp String
    */
-  def toTimestamp(datetime: DateTime): String = TstampFormat.print(datetime)
+  def toTimestamp(datetime: DateTime): String = datetime.getMillis.toString //TstampFormat.print(datetime)
 
    /**
     * Converts a Redshift-compatible timestamp String

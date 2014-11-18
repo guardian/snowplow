@@ -145,7 +145,6 @@ object ElasticsearchSinkApp extends App {
     props.setProperty(KinesisConnectorConfiguration.PROP_DYNAMODB_ENDPOINT, s"dynamodb.$streamRegion.amazonaws.com")
     props.setProperty(KinesisConnectorConfiguration.PROP_REGION_NAME, streamRegion)
 
-
     new KinesisConnectorConfiguration(props, new DefaultAWSCredentialsProviderChain())
 
   }
