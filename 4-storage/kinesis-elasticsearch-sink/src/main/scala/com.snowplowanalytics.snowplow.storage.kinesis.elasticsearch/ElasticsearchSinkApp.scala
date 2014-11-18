@@ -33,9 +33,6 @@ import com.amazonaws.auth.DefaultAWSCredentialsProviderChain
 
 // AWS Kinesis Connector libs
 import com.amazonaws.services.kinesis.connectors.KinesisConnectorConfiguration
-//Elasticsearch connection discovery
-
-import com.snowplowanalytics.snowplow.storage.kinesis.elasticsearch.ElasticSearchConnection
 
 object ElasticsearchSinkApp extends App {
   val parser = new ArgotParser(
@@ -108,11 +105,7 @@ object ElasticsearchSinkApp extends App {
     val secretKey = aws.getString("secret-key")
 
     val elasticsearch = connector.getConfig("elasticsearch")
-    val elasticsearchEndpoint = {
-      ElasticSearchConnection.discoveredElasticsearchHosts(elasticsearch.getString("stack"))
-        .headOption.getOrElse(elasticsearch.getString("endpoint"))
-    }
-
+    val elasticsearchEndpoint = elasticsearch.getString("endpoint")
     val clusterName = elasticsearch.getString("cluster-name")
 
     val kinesis = connector.getConfig("kinesis")
@@ -142,10 +135,8 @@ object ElasticsearchSinkApp extends App {
     props.setProperty(KinesisConnectorConfiguration.PROP_BUFFER_MILLISECONDS_LIMIT, timeLimit)
 
     props.setProperty(KinesisConnectorConfiguration.PROP_CONNECTOR_DESTINATION, "elasticsearch")
-    props.setProperty(KinesisConnectorConfiguration.PROP_DYNAMODB_ENDPOINT, s"dynamodb.$streamRegion.amazonaws.com")
-    props.setProperty(KinesisConnectorConfiguration.PROP_REGION_NAME, streamRegion)
 
     new KinesisConnectorConfiguration(props, new DefaultAWSCredentialsProviderChain())
-
   }
+
 }
