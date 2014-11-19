@@ -25,15 +25,14 @@ object Dependencies {
 
   object V {
     // Java
-    val logging              = "1.1.3"
     val httpCore             = "4.3"
     val httpClient           = "4.3.1"
     val jacksonCore          = "2.3.0"
-    val slf4j                = "1.7.5"
     val awsSdk               = "1.6.11"
     val kinesisClient        = "1.2.0"
     val kinesisConnector     = "1.1.1"
     // Scala
+    val logback              = "1.0.13"
     val argot                = "1.0.1"
     val config               = "1.0.2"
     val scalaUtil            = "0.1.0"
@@ -57,16 +56,15 @@ object Dependencies {
 
   object Libraries {
     // Java
-    val logging              = "commons-logging"            %  "commons-logging"          % V.logging
     val httpCore             = "org.apache.httpcomponents"  %  "httpcore"                 % V.httpCore
     val httpClient           = "org.apache.httpcomponents"  %  "httpclient"               % V.httpClient
     val jacksonCore          = "com.fasterxml.jackson.core" %  "jackson-core"             % V.jacksonCore
-    val slf4j                = "org.slf4j"                  %  "slf4j-simple"             % V.slf4j
     val awsSdk               = "com.amazonaws"              %  "aws-java-sdk"             % V.awsSdk
     val kinesisClient        = "com.amazonaws"              %  "amazon-kinesis-client"    % V.kinesisClient
     val kinesisConnector     = "com.amazonaws"              %  "amazon-kinesis-connector" % V.kinesisConnector
     val maxmindGeoip         = "com.snowplowanalytics"      %% "scala-maxmind-geoip"      % V.maxmindGeoip % "provided"
     // Scala
+    val logback              = "ch.qos.logback"             %  "logback-classic"          % V.logback
     val argot                = "org.clapper"                %% "argot"                    % V.argot
     val config               = "com.typesafe"               %  "config"                   % V.config
     val scalaUtil            = "com.snowplowanalytics"      %  "scala-util"               % V.scalaUtil
