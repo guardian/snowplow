@@ -13,11 +13,11 @@ import scala.collection.convert.decorateAsJava._
 
 object ElasticSearchConnection {
 
-  def discoveredElasticsearchHosts(stack: String): List[String] = {
+  def discoveredElasticsearchHosts(stack: String, stage: String): List[String] = {
     import scala.collection.JavaConversions._
     val hosts = AWS.EC2.describeInstances(
       new DescribeInstancesRequest().withFilters(
-        new Filter("tag:Stage", List("TEST")),
+        new Filter("tag:Stage", List(stage)),
         new Filter("tag:App", List("elasticsearch")),
         new Filter("tag:Stack", List(stack))
       ))

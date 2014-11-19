@@ -109,7 +109,10 @@ object ElasticsearchSinkApp extends App {
 
     val elasticsearch = connector.getConfig("elasticsearch")
     val elasticsearchEndpoint = {
-      ElasticSearchConnection.discoveredElasticsearchHosts(elasticsearch.getString("stack"))
+      ElasticSearchConnection.discoveredElasticsearchHosts(
+        elasticsearch.getString("stack"),
+        connector.getString("stage")
+      )
         .headOption.getOrElse(elasticsearch.getString("endpoint"))
     }
 
