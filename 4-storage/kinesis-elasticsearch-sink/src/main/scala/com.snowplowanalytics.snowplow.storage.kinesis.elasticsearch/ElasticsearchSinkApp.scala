@@ -120,7 +120,6 @@ object ElasticsearchSinkApp extends App {
     val appName = kinesis.getString("app-name")
     val initialPosition = kinesis.getString("initial-position")
     val streamName = kinesis.getString("stream-name")
-    val streamEndpoint = s"https://kinesis.${streamRegion}.amazonaws.com"
 
     val buffer = connector.getConfig("buffer")
     val byteLimit = buffer.getString("byte-limit")
@@ -130,7 +129,6 @@ object ElasticsearchSinkApp extends App {
     val props = new Properties
 
     props.setProperty(KinesisConnectorConfiguration.PROP_KINESIS_INPUT_STREAM, streamName)
-    props.setProperty(KinesisConnectorConfiguration.PROP_KINESIS_ENDPOINT, streamEndpoint)
     props.setProperty(KinesisConnectorConfiguration.PROP_APP_NAME, appName)
     props.setProperty(KinesisConnectorConfiguration.PROP_INITIAL_POSITION_IN_STREAM, initialPosition)
 
@@ -142,7 +140,6 @@ object ElasticsearchSinkApp extends App {
     props.setProperty(KinesisConnectorConfiguration.PROP_BUFFER_MILLISECONDS_LIMIT, timeLimit)
 
     props.setProperty(KinesisConnectorConfiguration.PROP_CONNECTOR_DESTINATION, "elasticsearch")
-    props.setProperty(KinesisConnectorConfiguration.PROP_DYNAMODB_ENDPOINT, s"dynamodb.$streamRegion.amazonaws.com")
     props.setProperty(KinesisConnectorConfiguration.PROP_REGION_NAME, streamRegion)
 
     new KinesisConnectorConfiguration(props, new DefaultAWSCredentialsProviderChain())
