@@ -22,8 +22,7 @@ object HistoryRewriter extends UpdateDsl with SearchDsl with FilterDsl with Inde
     ElasticSearchConnection.discoveredElasticsearchHosts(
       elasticsearch.getString("stack"),
       ElasticsearchSinkApp.configValue.getString("stage")
-    )
-      .headOption.getOrElse(elasticsearch.getString("endpoint"))
+    ).headOption.getOrElse(elasticsearch.getString("endpoint"))
   }
 
   import org.elasticsearch.common.settings.ImmutableSettings
@@ -38,13 +37,11 @@ object HistoryRewriter extends UpdateDsl with SearchDsl with FilterDsl with Inde
   private def getEvents(userId: String) = {
     val req = search("events") types "enriched" filter {
         missingFilter("timesincesubscription")
-      } query {
+    } query {
       bool {
         must (
           termQuery("unstruct_event_1.from.userid", userId)
-        ) not (
-          termsQuery("unstruct_event_1.from.subscriptionstatus", "resubscriber", "firsttime_subscriber")
-        )
+        ) not termsQuery("unstruct_event_1.from.subscriptionstatus", "resubscriber", "firsttime_subscriber")
       }
     }
     client.execute(req.build)
@@ -57,7 +54,7 @@ object HistoryRewriter extends UpdateDsl with SearchDsl with FilterDsl with Inde
           Option(event.getSource.get("dvce_tstamp")).flatMap {
             case ts:String => {
               val diff = ts.toLong - timestamp
-              Some(update(event.getId).in("events/enriched").doc("timesincesubscription" -> diff) )
+              Some(update(event.getId).in("events/enriched").doc("timesincesubscription" -> diff))
             }
             case _ => None
           }
@@ -68,7 +65,6 @@ object HistoryRewriter extends UpdateDsl with SearchDsl with FilterDsl with Inde
         } onComplete {
           case Success(res) => {
             val result = res.getItems.toList.map(item => Option(item.getFailureMessage)).flatten
-
             if (result.length > 0) {
               LOG.error(s"failed to update historical record of user $userId: ${result.mkString("", ", ", "")}")
             }
