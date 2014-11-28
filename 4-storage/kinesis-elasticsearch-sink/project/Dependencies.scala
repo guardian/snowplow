@@ -68,6 +68,7 @@ object Dependencies {
     val scalazon             = "io.github.cloudify"         %% "scalazon"                 % V.scalazon
     val scalaz7              = "org.scalaz"                 %% "scalaz-core"              % V.scalaz7
     val igluClient           = "com.snowplowanalytics"      %% "iglu-scala-client"        % V.igluClient
+    val elastic4s            = "com.sksamuel.elastic4s"     %% "elastic4s"                % "1.4.0"
     // Scala (test only)
     val specs2               = "org.specs2"                 %% "specs2"                   % V.specs2         % "test"
     val scalazSpecs2         = "org.typelevel"              %% "scalaz-specs2"            % V.scalazSpecs2   % "test"
