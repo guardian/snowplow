@@ -26,6 +26,8 @@ import com.amazonaws.services.kinesis.connectors.elasticsearch.{
   ElasticsearchTransformer
 }
 import com.amazonaws.services.kinesis.model.Record
+import org.joda.time.DateTime
+import org.slf4j.LoggerFactory
 
 // Scalaz
 import scalaz._
@@ -248,6 +250,18 @@ class SnowplowElasticsearchTransformer(documentIndex: String, documentType: Stri
   def jsonifyGoodEvent(event: Array[String]): JsonRecord = {
     val jObjects: Array[JObject] = fields.zip(event).map(converter)
     val eventJson = jObjects.fold(JObject())(_ ~ _)
+
+    val eventSource = ScalazJson4sUtils.extract[String](eventJson, "unstruct_event_1", "eventSource").toOption
+    eventSource match {
+      case Some("subscription") => {
+        for {
+          id <- ScalazJson4sUtils.extract[String](eventJson, "unstruct_event_1", "from", "userid").toOption
+          tstamp <- ScalazJson4sUtils.extract[String](eventJson, "dvce_tstamp").toOption
+        } HistoryRewriter.rewrite(id, new DateTime(tstamp.toLong).getMillis)
+      }
+      case _ =>
+    }
+
     JsonRecord(compact(render(eventJson)), ScalazJson4sUtils.extract[String](eventJson, "event_id").toOption)
   }
 

@@ -46,7 +46,8 @@ object SnowplowKinesisEnrichBuild extends Build {
         Libraries.awsSdk,
         Libraries.kinesisClient,
         Libraries.kinesisConnector,
-        Libraries.igluClient
+        Libraries.igluClient,
+        Libraries.elastic4s
         // Add your additional libraries here (comma-separated)...
       )
     )
