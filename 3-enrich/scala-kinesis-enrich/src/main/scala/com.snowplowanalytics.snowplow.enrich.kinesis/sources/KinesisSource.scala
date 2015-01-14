@@ -155,8 +155,8 @@ class KinesisSource(config: KinesisEnrichConfig, igluResolver: Resolver, enrichm
     private def processRecordsWithRetries(records: List[Record]) = {
       for (record <- records) {
         try {
-          info(s"Sequence number: ${record.getSequenceNumber}")
-          info(s"Partition key: ${record.getPartitionKey}")
+          debug(s"Sequence number: ${record.getSequenceNumber}")
+          debug(s"Partition key: ${record.getPartitionKey}")
           enrichEvents(record.getData.array)
         } catch {
           case t: Throwable =>
